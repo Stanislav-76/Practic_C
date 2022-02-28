@@ -20,12 +20,14 @@ void PrintArray(int[,] arr)
         Console.WriteLine();
     }
 }
-int[,] array = new int[4, 4];
+int[,] array = new int[6, 5];
 FillArray(array);
 PrintArray(array);
 Console.WriteLine();
 int sum = 0;
-for (int i = 0; i < array.GetLength(0); i++)
+int m = array.GetLength(0);
+if (m > array.GetLength(1)) m = array.GetLength(1);
+for (int i = 0; i < m; i++)
 {
     sum = sum + array[i, i];
 }

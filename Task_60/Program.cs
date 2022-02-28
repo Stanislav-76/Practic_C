@@ -91,7 +91,7 @@ bool coincide(int[,] arr, int num, int k)
     }
     return false;
 }
-int[,] array = new int[3, 3];
+int[,] array = new int[5, 5];
 FillArray(array);
 PrintArray(array);
 Console.WriteLine();

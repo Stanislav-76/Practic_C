@@ -24,14 +24,14 @@ void sortStringArray(int x, int[,] arr)
 {
     for (int j = 0; j < arr.GetLength(1); j++)
     {
-        int min = arr[x,j];
+        int max = arr[x,j];
         for (int n = j + 1; n < arr.GetLength(1); n++)
         {
-            if (arr[x,n] < min)
+            if (arr[x,n] > max)
             {
                 arr[x,j] = arr[x,n];
-                arr[x,n] = min;
-                min = arr[x,j];
+                arr[x,n] = max;
+                max = arr[x,j];
             }
         }
     }
