@@ -11,55 +11,50 @@
 // Задача: найти M при заданном N и получить одно из разбиений на группы N ≤ 10²⁰
 
 
-//не работает
-int n = 10;
-int m = 0;
-void PrintArrayGroup(int[,] arr)
+ulong n = 50;
+ulong m = 0;
+void PrintArrayGroup(ulong[,] arr)
 {
-    for (int i = 0; i < arr.GetLength(0); i++)
+    for (ulong i = 0; i < Convert.ToUInt64(arr.GetLength(0)); i++)
     {
         Console.Write($"Группа {i + 1}: ");
-        for (int j = 0; j < arr.GetLength(1); j++)
+        for (ulong j = 0; j < Convert.ToUInt64(arr.GetLength(1)); j++)
         {
-            if (arr[i, j] > 0) Console.Write(arr[i, j] + "   ");
+            if (arr[i, j] > 0) Console.Write(arr[i, j] + " ");
         }
         Console.WriteLine();
     }
 }
-int countGroup(int x)
+ulong countGroup(ulong x)
 {
     if (x == 0) return m;
-    x = x / 2;
     m++;
-    return countGroup(x);
+    return countGroup(x / 2);
 }
 m = countGroup(n);
-Console.WriteLine(m);
-
-int[,] numberGroup = new int[m, n];
-//numberGroup[0, 0] = 1;
-int zz = 0;
-for (int i = 1; i <= n; i++)
+Console.WriteLine($"Для числа {n} групп {m}");
+ulong[,] numberGroup = new ulong[m, n];
+for (ulong i = 1; i <= n; i++)
 {
-    bool exit = true;
-    for (int j = 0; j < m; j++)
+    bool exit = false;
+    for (ulong j = 0; j < m; j++)
     {
-        for (int k = 0; k < i; k++)
+        for (ulong k = 0; k < i; k++)
         {
-            if (numberGroup[j, k] > 0 && i % numberGroup[j, k] > 0)
+            if (numberGroup[j, k] > 0 && i % numberGroup[j, k] == 0)
             {
-                exit = true;
-                Console.WriteLine("Проверка1 " + "j " + j + " k " + k + " i " + i + " " + exit);
-                continue;
-                //numberGroup[k, j] = i;
-                //break;
+                //Console.WriteLine("Проверка1 " + "j " + j + " k " + k + " i " + i + " " + exit);
+                break;
             }
-            if (exit == true) numberGroup[j, k] = i;
-            Console.WriteLine("Проверка2 " + "j " + j + " k " + k + " i " + i + " " + exit);
-            exit = false;
-            break;
+            if (numberGroup[j, k] == 0)
+            {
+                numberGroup[j, k] = i;
+                exit = true;
+                //Console.WriteLine("Проверка2 " + "j " + j + " k " + k + " i " + i + " " + exit);
+                break;
+            }
         }
-        if (exit == false) break;
+        if (exit == true) break;
     }
 }
 PrintArrayGroup(numberGroup);
